@@ -124,7 +124,9 @@ int main(int argc, char **argv)
             citHandler *citCli = new citHandler(citHandler::e_SIPType::e_master);
             citCli->run();
             // std::shared_ptr<citHandler> citCli = std::make_shared<citHandler>(citHandler::e_master);
-            std::this_thread::sleep_for(std::chrono::seconds(5));
+            
+            std::this_thread::sleep_for(std::chrono::seconds(10));
+            
             delete citCli;
 
         }

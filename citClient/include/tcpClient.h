@@ -2,7 +2,7 @@
 #define TCPCLIENT_H
 #include <string>
 #include <thread>
-static constexpr char SIP_SERVER_SLAVE_INTERNAL_IP_ADDR[] = "127.0.0.1";
+static constexpr char SIP_SERVER_SLAVE_INTERNAL_IP_ADDR[] = "172.173.20.12";
 static constexpr char SIP_SERVER_MASTER_INTERNAL_IP_ADDR[] = "127.0.0.1";
 class tcpClient
 {
@@ -12,7 +12,6 @@ public:
 
     bool connectToServer();
     bool sendData(const std::string& data);
-    // std::string receiveData(size_t size);
     void startListening();
     void stopListening();
 

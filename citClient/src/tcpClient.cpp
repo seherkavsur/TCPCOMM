@@ -10,7 +10,7 @@ tcpClient::tcpClient(const std::string& serverIP, int serverPort) : serverIP(ser
     listening = false;
 }
 tcpClient::~tcpClient(){
-    std::cout << "stop listening..." << std::endl;
+    std::cout << "tcp client dtor" << std::endl;
     stopListening();
     if (sockfd != -1) {
             close(sockfd);
@@ -57,17 +57,6 @@ bool tcpClient::sendData(const std::string& data) {
     }
     return true;
 }
-
-
-// std::string tcpClient::receiveData(size_t size) {
-//     char buffer[size];
-//     ssize_t bytesReceived = recv(sockfd, buffer, size, 0);
-//     if (bytesReceived < 0) {
-//         std::cerr << "Receive failed" << std::endl;
-//         return "";
-//     }
-//     return std::string(buffer, bytesReceived);
-// }
 /**
  * create a thread for listen socket
  */
@@ -96,7 +85,7 @@ void tcpClient::listenForMessages() {
             std::cout << "Server disconnected." << std::endl;
             break;
         } else {
-            buffer[bytes_received] = '\0';  // Null-terminate the received data
+            buffer[bytes_received] = '\0'; 
             std::cout << "Received: " << buffer << std::endl;
             std::string strBuffer = buffer;
         }

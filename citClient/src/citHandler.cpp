@@ -15,19 +15,19 @@ citHandler::citHandler(const citHandler::e_SIPType type) : sipType(type){
 }
 citHandler::~citHandler(){
     std::cout << "cit dtor" << std::endl;
-    delete this->tcpClientHandler;
+    
     this->isRunning = false;
     if (this->operationthread.joinable())
     {
         operationthread.join(); 
     }
-    
-    
+    delete this->tcpClientHandler;
 }
 
 void citHandler::run(){
     this->operationthread = std::thread(&citHandler::threadFunc, this);
 }
+
 void citHandler::threadFunc(){
     while(this->isRunning){
         if (this->tcpClientHandler->sendData("hello Server!"))
