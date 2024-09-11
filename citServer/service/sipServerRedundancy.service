@@ -1,0 +1,23 @@
+[Unit]
+Description=Sip Server Redundancy Process. SHS Custom Edition.
+Requires=network-online.target
+#Requires=mysqld.service
+#Requires=asterisk.service
+After=network.target network-online.target
+#After=mysqld.service
+#After=asterisk.service
+  
+[Service]
+Type=simple
+WorkingDirectory=/root/
+ExecStart=/root/sipServerRedundancy --master
+RemainAfterExit=true  
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+TimeoutStartSec=450
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=%n
+
+[Install]
+WantedBy=multi-user.target
