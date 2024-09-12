@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "tcpClient.h"
+static constexpr int MAX_CONNECTION_TRY_COUNT = 5;
 class citHandler
 {
 public:
@@ -23,6 +24,8 @@ private:
     tcpClient *tcpClientHandler;
     std::thread operationthread;
     bool isRunning = true;
+
+    bool startConnection();
 
     
 };

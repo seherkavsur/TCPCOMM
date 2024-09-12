@@ -45,6 +45,7 @@ bool tcpClient::connectToServer() {
     }
 
     std::cout << "Connected to server" << std::endl;
+    this->connectionState = e_TCP_CONNECTION_OK;
     return true;
 }
 /**
@@ -80,9 +81,11 @@ void tcpClient::listenForMessages() {
         ssize_t bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
         if (bytes_received < 0) {
             std::cerr << "Receive error: " << strerror(errno) << std::endl;
+            this->connectionState = e_TCP_RECIEVE_ERR;
             break;
         } else if (bytes_received == 0) {
             std::cout << "Server disconnected." << std::endl;
+            this->connectionState = e_TCP_DISCONNECTED;
             break;
         } else {
             buffer[bytes_received] = '\0'; 
